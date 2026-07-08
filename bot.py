@@ -306,20 +306,23 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def main():
     
-    TOKEN = os.environ.get("BOT_TOKEN")
-    application = Application.builder().token(TOKEN).build()
-    
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CommandHandler("leaderboard", leaderboard_command))
-    application.add_handler(CommandHandler("fans", handle_message))
+    TOKEN = "8890484763:AAE24a5Djas4_NkrZYFAeG39IMRaChu_Xi0"
+   from telegram.ext import ApplicationBuilder
+    application = ApplicationBuilder().token(TOKEN).build()
+
+    # ۳. اضافه کردن هندلرها
+    application.add_handler(CommandHandler("start", handle_message))
     application.add_handler(CommandHandler("predict", handle_message))
     application.add_handler(CommandHandler("quiz", handle_message))
     
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     application.add_handler(CallbackQueryHandler(handle_callback))
     
+    # ۴. اجرای ربات
     print("نسخه نهایی و متصل به API فعال شد...")
     application.run_polling()
 
 if __name__ == '__main__':
     main()
+    
+
